@@ -1,0 +1,91 @@
+digraph RecursiveMergeSort {
+    node [shape=box, style=rounded, fontname="Times New Roman"];
+    edge [fontname="Times New Roman", fontsize=10];
+
+    subgraph cluster_divide {
+        label="Етап розділення";
+        style=dashed;
+        color=black;
+
+        node_0 [label="Початковий виклик\n[50, 80, 19, 86, 35, 7, 60, 48, 51]"];
+        node_1_L [label="[50, 80, 19, 86]"];
+        node_1_R [label="[35, 7, 60, 48, 51]"];
+        
+        node_2_LL [label="[50, 80]"];
+        node_2_LR [label="[19, 86]"];
+        node_2_RL [label="[35, 7]"];
+        node_2_RR [label="[60, 48, 51]"];
+
+        node_3_LLL [label="[50]"];
+        node_3_LLR [label="[80]"];
+        node_3_LRL [label="[19]"];
+        node_3_LRR [label="[86]"];
+        
+        node_3_RLL [label="[35]"];
+        node_3_RLR [label="[7]"];
+        node_3_RRL [label="[60]"];
+        node_3_RRR [label="[48, 51]"];
+
+        node_4_RRRL [label="[48]"];
+        node_4_RRRR [label="[51]"];
+
+        node_0 -> node_1_L [label="ліва частина"];
+        node_0 -> node_1_R [label="права частина"];
+        
+        node_1_L -> node_2_LL;
+        node_1_L -> node_2_LR;
+        node_1_R -> node_2_RL;
+        node_1_R -> node_2_RR;
+
+        node_2_LL -> node_3_LLL;
+        node_2_LL -> node_3_LLR;
+        node_2_LR -> node_3_LRL;
+        node_2_LR -> node_3_LRR;
+
+        node_2_RL -> node_3_RLL;
+        node_2_RL -> node_3_RLR;
+        node_2_RR -> node_3_RRL;
+        node_2_RR -> node_3_RRR;
+
+        node_3_RRR -> node_4_RRRL;
+        node_3_RRR -> node_4_RRRR;
+    }
+
+    subgraph cluster_merge {
+        label="Етап злиття";
+        style=dashed;
+        color=black;
+
+        merge_4_RRR [label="[48, 51]"];
+
+        merge_3_LL [label="[50, 80]"];
+        merge_3_LR [label="[19, 86]"];
+        merge_3_RL [label="[7, 35]"];
+        merge_3_RR [label="[48, 51, 60]"];
+
+        merge_2_L [label="[19, 50, 80, 86]"];
+        merge_2_R [label="[7, 35, 48, 51, 60]"];
+
+        merge_1 [label="[7, 19, 35, 48, 50, 51, 60, 80, 86]"];
+    }
+
+    node_4_RRRL -> merge_4_RRR [style=dotted];
+    node_4_RRRR -> merge_4_RRR [style=dotted];
+
+    node_3_LLL -> merge_3_LL [style=dotted];
+    node_3_LLR -> merge_3_LL [style=dotted];
+    node_3_LRL -> merge_3_LR [style=dotted];
+    node_3_LRR -> merge_3_LR [style=dotted];
+    node_3_RLL -> merge_3_RL [style=dotted];
+    node_3_RLR -> merge_3_RL [style=dotted];
+    node_3_RRL -> merge_3_RR [style=dotted];
+    merge_4_RRR -> merge_3_RR [style=dotted];
+
+    merge_3_LL -> merge_2_L [style=dotted];
+    merge_3_LR -> merge_2_L [style=dotted];
+    merge_3_RL -> merge_2_R [style=dotted];
+    merge_3_RR -> merge_2_R [style=dotted];
+
+    merge_2_L -> merge_1 [style=dotted];
+    merge_2_R -> merge_1 [style=dotted];
+}
