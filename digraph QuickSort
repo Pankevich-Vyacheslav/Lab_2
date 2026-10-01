@@ -1,0 +1,62 @@
+digraph QuickSort {
+    node [shape=box, style=rounded, fontname="Times New Roman"];
+    edge [fontname="Times New Roman", fontsize=10];
+
+    main [label="Основний виклик\n[50, 80, 19, 86, 35, 7, 60, 48, 51]"];
+
+    subgraph cluster_left {
+        label="Лівий підмасив";
+        style=solid;
+        color=black;
+        
+        node_0_3 [label="[48, 7, 19, 35]"];
+        node_0_2 [label="[35, 7, 19]"];
+        node_0_1 [label="[19, 7]"];
+        
+        node_0_0 [label="[7]"];
+        node_1_1 [label="[19]"];
+        node_2_2 [label="[35]"];
+        node_3_3 [label="[48]"];
+        
+        node_0_3 -> node_0_2 [label="l=0, r=2"];
+        node_0_3 -> node_3_3 [label="l=3, r=3"];
+        
+        node_0_2 -> node_0_1 [label="l=0, r=1"];
+        node_0_2 -> node_2_2 [label="l=2, r=2"];
+        
+        node_0_1 -> node_0_0 [label="l=0, r=0"];
+        node_0_1 -> node_1_1 [label="l=1, r=1"];
+    }
+
+    subgraph cluster_right {
+        label="Правий підмасив";
+        style=solid;
+        color=black;
+        
+        node_4_8 [label="[86, 80, 60, 50, 51]"];
+        node_4_7 [label="[50, 51, 60, 80]"];
+        node_5_7 [label="[51, 60, 80]"];
+        node_5_6 [label="[51, 60]"];
+        
+        node_4_4 [label="[50]"];
+        node_5_5 [label="[51]"];
+        node_6_6 [label="[60]"];
+        node_7_7 [label="[80]"];
+        node_8_8 [label="[86]"];
+        
+        node_4_8 -> node_4_7 [label="l=4, r=7"];
+        node_4_8 -> node_8_8 [label="l=8, r=8"];
+        
+        node_4_7 -> node_4_4 [label="l=4, r=4"];
+        node_4_7 -> node_5_7 [label="l=5, r=7"];
+        
+        node_5_7 -> node_5_6 [label="l=5, r=6"];
+        node_5_7 -> node_7_7 [label="l=7, r=7"];
+        
+        node_5_6 -> node_5_5 [label="l=5, r=5"];
+        node_5_6 -> node_6_6 [label="l=6, r=6"];
+    }
+
+    main -> node_0_3 [label="l=0, r=3"];
+    main -> node_4_8 [label="l=4, r=8"];
+}
