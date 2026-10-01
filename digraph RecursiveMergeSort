@@ -1,1 +1,32 @@
+digraph IterativeMergeSort {
+    node [shape=box, style=filled, fillcolor=lightgreen, fontname="Times New Roman"];
+    edge [style=dotted];
 
+    start [label="Початковий масив\n[50, 80, 19, 86, 35, 7, 60, 48, 51]", fillcolor=bisque];
+
+    step1_1 [label="Злиття [50] та [80]\n[50, 80]"];
+    step1_2 [label="Злиття [19] та [86]\n[19, 86]"];
+    step1_3 [label="Злиття [35] та [7]\n[7, 35]"];
+    step1_4 [label="Злиття [60] та [48]\n[48, 60]"];
+
+    start -> step1_1;
+    start -> step1_2;
+    start -> step1_3;
+    start -> step1_4;
+
+    step2_1 [label="Злиття [50, 80] та [19, 86]\n[19, 50, 80, 86]"];
+    step2_2 [label="Злиття [7, 35] та [48, 60]\n[7, 35, 48, 60]"];
+
+    step1_1 -> step2_1 [label="Злиття"];
+    step1_2 -> step2_1 [label="Злиття"];
+    step1_3 -> step2_2 [label="Злиття"];
+    step1_4 -> step2_2 [label="Злиття"];
+
+    step3_1 [label="Злиття [19, 50, 80, 86] та [7, 35, 48, 60]\n[7, 19, 35, 48, 50, 60, 80, 86]"];
+    step2_1 -> step3_1 [label="Злиття"];
+    step2_2 -> step3_1 [label="Злиття"];
+
+    final [label="Фінальне злиття\nЗлиття [7, 19, 35, 48, 50, 60, 80, 86] та [51]\n[7, 19, 35, 48, 50, 51, 60, 80, 86]", fillcolor=mediumseagreen];
+    step3_1 -> final [label="Фінальне злиття"];
+    start -> final [style=dotted, label="Елемент [51] без пари"];
+}
